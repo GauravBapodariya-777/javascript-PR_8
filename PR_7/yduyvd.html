@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .form-group input[type="button"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .form-group input[type="button"]:hover {
+      background-color: #45a049;
+    }
+
+    .toggle-password {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-password input[type="button"] {
+      margin-left: 10px;
+      background-color: transparent;
+      border: none;
+      color: #777777;
+      cursor: pointer;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .border-25 {
+      border-radius: 20px;
+    }
+
+    .w-80 {
+      width: 80%;
+    }
+  </style>
+</head>
+
+<body class="align-items-center d-flex">
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name :- </label>
+        <input type="text" id="r1" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email :- </label>
+        <input type="email" id="r2" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password :- </label>
+        <div class="input-group">
+          <input type="password" id="r3" class="form-control w-80" required />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary border-25" type="button" onclick="sii()">
+              <i class="fa fa-eye-slash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password :- </label>
+        <div class="input-group">
+          <input type="password" id="r4" class="form-control w-80" required />
+          <div class="input-group-append">
+            <button class="border-25 btn btn-outline-secondary" type="button" onclick="see()">
+              <i class="fa fa-eye-slash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="button" value="Submit" class="btn btn-primary" onclick="save()" />
+      </div>
+    </form>
+    <h1 id="check"></h1>
+  </div>
+
+  <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+  <script>
+    const sii = () => {
+      var icon = document.getElementById('r3');
+
+      if (icon.type === "password") {
+        icon.type = "text";
+      } else {
+        icon.type = "password"
+      }
+    }
+    const see = () => {
+      var icon = document.getElementById('r4');
+
+      if (icon.type === "password") {
+        icon.type = "text";
+      } else {
+        icon.type = "password"
+      }
+    }
+
+    const save = () => {
+      var s1 = document.getElementById("r1").value;
+      var s2 = document.getElementById("r2").value;
+      var s3 = document.getElementById("r3").value;
+      var s4 = document.getElementById("r4").value;
+      var check1 = /^[A-Za-z]+$/;
+      var check2 = /\S+@\S+\.\S+/;
+      try {
+        if (!s1 && !s2 && !s3 && !s4) {
+          throw "Fill all fields";
+          return false;
+        } else if (!s1) {
+          throw "Fill Name field";
+          return false;
+        } else if (!s2) {
+          throw "Fill email field";
+          return false;
+        } else if (!s3) {
+          throw "Fill password field";
+          return false;
+        } else if (!s4) {
+          throw "fill conform password flield";
+        } else if (s3 != s4) {
+          throw "your password are not same with your conform password";
+          return false;
+        } else if (!(s3.length >= 6)) {
+          throw "your password is small";
+          return false;
+        } else if (!s1.match(check1)) {
+          throw "invalid name";
+          return false;
+        } else if (!s2.match(check2)) {
+          throw "invalid email";
+          return false;
+        } else {
+          throw "your form sumbit successfully";
+        }
+      } catch (err) {
+        alert(err);
+        document.getElementById("r1").value = "";
+        document.getElementById("r2").value = "";
+        document.getElementById("r3").value = "";
+        document.getElementById("r4").value = "";
+      }
+    }
+  </script>
+</body>
+
+</html>
